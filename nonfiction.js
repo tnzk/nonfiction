@@ -30,9 +30,10 @@ function slider( id, width, height, styles)
       stroke: border.color,
       'stroke-width': border.width
     });
-    release = function(){
+    release = function(e){
       this.nonfiction.moveon = false;
-      base.attr('stroke', this.nonfiction.border.color);
+      this.attr('stroke', this.nonfiction.border.color);
+      this.nonfiction.prev = e.pageX;
     };
     base.mouseup(release);
     base.mouseout(release);
@@ -53,14 +54,15 @@ function slider( id, width, height, styles)
           instance.nonfiction.prev = e.pageX;
 	}
         update_relative( dx, instance);
-        instance.nonfiction.prev = e.pageX;
       }
     };
-    base.mousemove(function(e){update(e, this)});
+    base.mousemove(function(e){
+      update(e, this)
+      this.nonfiction.prev = e.pageX;
+    });
     base.mousedown(function(e){
       this.nonfiction.moveon = true;
       base.attr('stroke', '#f00');
-      update(e, this);
     });
 
 }
