@@ -30,31 +30,37 @@ function slider( id, width, height, styles)
       stroke: border.color,
       'stroke-width': border.width
     });
-    base.mousedown(function(){
-      this.nonfiction.moveon = true;
-      base.attr('stroke', '#f00');
-    });
     release = function(){
       this.nonfiction.moveon = false;
       base.attr('stroke', this.nonfiction.border.color);
     };
     base.mouseup(release);
     base.mouseout(release);
-    base.mousemove(function(e){
-      if(this.nonfiction.moveon){
+
+    update_relative = function(dx, instance){
+      instance.nonfiction.value += dx / (instance.getBBox().width / 100);
+      if(instance.nonfiction.value < 0)   instance.nonfiction.value = 0;
+      if(instance.nonfiction.value > 100) instance.nonfiction.value = 100;
+      instance.attr( 'fill', '0-'+instance.nonfiction.north.color+':'+instance.nonfiction.value+'-'+instance.nonfiction.south.color+':'+nf.value);
+    };
+    update = function(e, instance){
+      if(instance.nonfiction.moveon){
         var dx;
-        if( this.nonfiction.prev){ 
-	  dx = e.pageX - this.nonfiction.prev;
+        if( instance.nonfiction.prev){ 
+	  dx = e.pageX - instance.nonfiction.prev;
 	} else {
           dx = 0;
-          this.nonfiction.prev = e.pageX;
+          instance.nonfiction.prev = e.pageX;
 	}
-	this.nonfiction.value += dx;
-	if(this.nonfiction.value < 0)   this.nonfiction.value = 0;
-	if(this.nonfiction.value > 100) this.nonfiction.value = 100;
-        this.attr( 'fill', '0-'+north.color+':'+this.nonfiction.value+'-'+south.color+':'+nf.value);
-	this.nonfiction.prev = e.pageX;
+        update_relative( dx, instance);
+        instance.nonfiction.prev = e.pageX;
       }
+    };
+    base.mousemove(function(e){update(e, this)});
+    base.mousedown(function(e){
+      this.nonfiction.moveon = true;
+      base.attr('stroke', '#f00');
+      update(e, this);
     });
 
 }
