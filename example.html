@@ -5,6 +5,10 @@
   <script type="text/javascript" src="lib/jquery-1.4.2.min.js"></script>
   <script type="text/javascript" src="lib/raphael-min.js"></script>
   <script type="text/javascript" src="nonfiction.js"></script>
+  <style type="text/css">
+    #slider_panel > * {float: left; margin: 10px 5px;}
+    div.clear {float: none; clear: both;}
+  </style>
   <title>Nonfiction - the controllable chart library</title>
 </head>
 <body>
@@ -12,8 +16,14 @@
   <p>The library, "Nonfiction", provides some charts that allows the user to change the values on the chart. The edited values will be sent as HTTP parameters same as other form-fields.</p>
   <p>The charts available are listed below(with its how-to-use):</p>
   <h2>Slider</h2>
+  <div id="slider_panel">
+    <div>Knight</div>
+    <div id="slider"></div>
+    <div>Ninja</div>
+  </div>
+  <div class="clear"></div>
   <script type="text/javascript">
-    uhihi();
+    slider( 'slider', 200, 40);
   </script>
   <h2>Pie chart</h2>
   <p>:)</p>
