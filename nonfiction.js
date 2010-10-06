@@ -9,7 +9,7 @@ function nfo(id){ return $('#'+nfn(id)); }
 function nfp(id){ return $('#'+id); }
 function nf_addfield(id, default_value)
 {
-  nfp(id).append('<input type="text" name="'+nfn(id)+'" id="'+nfn(id)+'" value="'+default_value+'" />');
+  nfp(id).append('<input type="hidden" name="'+nfn(id)+'" id="'+nfn(id)+'" value="'+default_value+'" />');
 }
 function slider( id, width, height, default_value, styles)
 {
