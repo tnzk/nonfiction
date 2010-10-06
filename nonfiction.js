@@ -1,14 +1,23 @@
-function background( paper, w, h){
+function nf_background( paper, w, h)
+{
   var bg = paper.rect( 0, 0, w, h);
   bg.attr("gradient", "270-#fcfcfc-#fcfcfc:40-#ddd");
   bg.attr("stroke", "none");
 }
-function slider( id, width, height, styles)
+function nfn(id){ return 'nf_' + id; }
+function nfo(id){ return $('#'+nfn(id)); }
+function nfp(id){ return $('#'+id); }
+function nf_addfield(id, default_value)
+{
+  nfp(id).append('<input type="text" name="'+nfn(id)+'" id="'+nfn(id)+'" value="'+default_value+'" />');
+}
+function slider( id, width, height, default_value, styles)
 {
     var paper = Raphael( id, width + 20, height + 10);
-    background( paper, width + 20, height + 10);
+    nf_background( paper, width + 20, height + 10);
     var base = paper.rect( 10, height / 4 + 5, width, height - height / 2, 4);
-
+ 
+    default_value = (default_value) ? default_value : 50;
     var nf = new Object();
     var north = new Object();
     var south = new Object();
@@ -24,7 +33,7 @@ function slider( id, width, height, styles)
     nf.south = south;
     nf.border = border;
     nf.moveon = false;
-    nf.value = 50;
+    nf.value = default_value;
     base.nonfiction = nf;
 
     base.attr({
@@ -38,17 +47,18 @@ function slider( id, width, height, styles)
       this.nonfiction.prev = e.pageX;
     };
     base.mouseup(release);
-    base.mouseout(release);
+    nfp(id).mouseout(release);
     base.map = function(x){
       var raw_x = x - $('#'+id).offset().left - 10;
       return raw_x / (this.nonfiction.width / 100);
     };
-
+    nf_addfield(id, default_value);
     var update = function(x, instance){
-      instance.nonfiction.value = x;
+      instance.nonfiction.value = Math.round(x);
       if(instance.nonfiction.value < 0)   instance.nonfiction.value = 0;
       if(instance.nonfiction.value > 100) instance.nonfiction.value = 100;
       instance.attr( 'fill', '0-'+instance.nonfiction.north.color+':'+instance.nonfiction.value+'-'+instance.nonfiction.south.color+':'+nf.value);
+      nfo(id).val(instance.nonfiction.value);
     };
     base.mousemove(function(e){
       if(this.nonfiction.moveon) update( this.map(e.pageX), this);
@@ -59,4 +69,5 @@ function slider( id, width, height, styles)
       update( this.map(e.pageX), this);
     });
 
+    return paper;
 }
