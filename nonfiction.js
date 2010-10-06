@@ -22,10 +22,11 @@ function slider( id, width, height, default_value, styles)
     var north = new Object();
     var south = new Object();
     var border = new Object();
-    north.color = (styles && style.north) ? style.north : '#c00';
-    south.color = (styles && style.south) ? style.south : '#00c';
-    border.color = (styles && style.border) ? style.border : '#500';
-    border.width = (styles && style.borderwidth) ? style.borderwidth : 2;
+    north.color = (styles && styles.north) ? styles.north : '#c00';
+    south.color = (styles && styles.south) ? styles.south : '#00c';
+    border.color = (styles && styles.border) ? styles.border : '#500';
+    border.width = (styles && styles.borderwidth) ? styles.borderwidth : 2;
+    border.light = (styles && styles.borderhighlight) ? styles.borderhighlight : '#f00';
 
     nf.width = width;
     nf.height = height;
@@ -65,7 +66,7 @@ function slider( id, width, height, default_value, styles)
     });
     base.mousedown(function(e){
       this.nonfiction.moveon = true;
-      base.attr('stroke', '#f00');
+      base.attr('stroke', this.nonfiction.border.light);
       update( this.map(e.pageX), this);
     });
 
