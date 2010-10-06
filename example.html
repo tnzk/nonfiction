@@ -15,6 +15,7 @@
   <h1>Nonfiction - the controllable chart library</h1>
   <p>The library, "Nonfiction", provides some charts that allows the user to change the values on the chart. The edited values will be sent as HTTP parameters same as other form-fields.</p>
   <p>The charts available are listed below(with its how-to-use):</p>
+<form>
   <h2>Slider</h2>
   <div id="slider_panel">
     <div>Knight</div>
@@ -23,8 +24,9 @@
   </div>
   <div class="clear"></div>
   <script type="text/javascript">
-    slider( 'slider', 200, 40);
+    slider( 'slider', 200, 40, 18);
   </script>
+  <input type="button" value="Check the value!" onclick=" alert($('#nf_slider').val());" />
   <h2>Pie chart</h2>
   <p>:)</p>
   <h2>Radar chart</h2>
@@ -33,7 +35,7 @@
   <p>:)</p>
   <h2>Graph</h2>
   <p>:)</p>
-
+</form>
   <!--
   <script type="text/javascript"></script>
   -->
