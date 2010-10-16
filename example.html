@@ -6,8 +6,9 @@
   <script type="text/javascript" src="lib/raphael-min.js"></script>
   <script type="text/javascript" src="nonfiction.js"></script>
   <style type="text/css">
-    #slider_panel > * {float: left; margin: 10px 5px;}
-    div.clear {float: none; clear: both;}
+    div.control { float: left; margin: 10px 5px;}
+    pre.code    { overflow: scroll; border: #888 1px solid; padding: 5px; width: 50%;}
+    div.clear   { float: none; clear: both;}
   </style>
   <title>Nonfiction - the controllable chart library</title>
 </head>
@@ -17,12 +18,23 @@
   <p>The charts available are listed below(with its how-to-use):</p>
 <form>
   <h2>Slider</h2>
-  <p>Set your hit point:</p>
-  <div id="slider"></div>
-  <script type="text/javascript">
-    slider( 'slider', 200, 40, 100, { north: '#009', south: '#500', border: '#005', borderhighlight: '#00f'});
-  </script>
-  <input type="button" value="Check the value!" onclick=" alert($('#nf_slider').val());" />
+  <div class="control">
+    <div id="slider"></div>
+    <script type="text/javascript">
+      slider( 'slider', 200, 40, 100, { north: '#009',
+                                        south: '#500',
+                                        border: '#005',
+                                        borderhighlight: '#00f'});
+    </script>
+    <input type="button" value="Check the value!" onclick=" alert($('#nf_slider').val());" />
+  </div>
+  <pre class="code">
+&lt;script type=&quot;text/javascript&quot;&gt;  slider( 'slider', 200, 40, 100, { north: '#009', south: '#500', border: '#005', borderhighlight: '#00f'}); &lt;/script&gt;
+&lt;input type=&quot;button&quot; value=&quot;Check the value!&quot; onclick=&quot; alert($('#nf_slider').val());&quot; /&gt;
+  </pre>
+  <div class="clear">
+    hoge
+  </div>
   <h2>Pie chart</h2>
   <p>:)</p>
   <h2>Radar chart</h2>
