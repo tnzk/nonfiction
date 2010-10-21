@@ -21,20 +21,31 @@
   <div class="control">
     <div id="slider"></div>
     <script type="text/javascript">
-      slider( 'slider', 200, 40, 100, { north: '#555',
-                                        south: '#aaa',
-                                        border: '#555',
-                                        borderhighlight: '#777'});
+      slider( 'slider', 200, 40, 100);
     </script>
     <input type="button" value="Check the value!" onclick=" alert($('#nf_slider').val());" />
   </div>
   <pre class="code">
-&lt;script type=&quot;text/javascript&quot;&gt;  slider( 'slider', 200, 40, 100, { north: '#009', south: '#aaa', border: '#005', borderhighlight: '#00f'}); &lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;  slider( 'slider', 200, 40, 100, { north: '#555', south: '#aaa', border: '#555', borderhighlight: '#777'}); &lt;/script&gt;
 &lt;input type=&quot;button&quot; value=&quot;Check the value!&quot; onclick=&quot; alert($('#nf_slider').val());&quot; /&gt;
   </pre>
   <div class="clear">&nbsp;</div>
   <h2>Radar chart</h2>
-  <p>:)</p>
+  <div id="radarchart" style="float:left;"></div>
+  <table> 
+    <tr><td>ちから    </td><td><input id="p" name="test1" type="text" value="30" /></td></tr> 
+    <tr><td>たいりょく</td><td><input id="s" name="test2" type="text" value="30" /></td></tr> 
+    <tr><td>すばやさ  </td><td><input id="q" name="test3" type="text" value="30" /></td></tr> 
+    <tr><td>かしこさ  </td><td><input id="c" name="test4" type="text" value="30" /></td></tr> 
+    <tr><td>うんのよさ</td><td><input id="l" name="test5" type="text" value="30" /></td></tr> 
+  </table> 
+  <script type="text/javascript"> 
+    var scores = [30,30,30,30,30];
+    var labels = ["うんのよさ", "たいりょく", "ちから", "かしこさ", "すばやさ"];
+    var ids    = ["l", "s", "p", "c", "q"];
+    radar( "radarchart", 250, 250, scores, labels, ids, 50);
+  </script> 
+  <div class="clear">&nbsp;</div>
   <h2>Bar chart</h2>
   <p>:)</p>
   <h2>Graph</h2>
