@@ -4,6 +4,7 @@ function nf_background( paper, w, h)
   bg.attr("gradient", "270-#fcfcfc-#fcfcfc:40-#ddd");
   bg.attr("stroke", "none");
 }
+
 function nfn(id){ return 'nf_' + id; }
 function nfo(id){ return $('#'+nfn(id)); }
 function nfp(id){ return $('#'+id); }
@@ -11,11 +12,12 @@ function nf_addfield(id, default_value)
 {
   nfp(id).append('<input type="hidden" name="'+nfn(id)+'" id="'+nfn(id)+'" value="'+default_value+'" />');
 }
+
 function slider( id, width, height, default_value, styles)
 {
     var paper = Raphael( id, width + 20, height + 10);
     nf_background( paper, width + 20, height + 10);
-    var base = paper.rect( 10, height / 4 + 5, width, height - height / 2, 4);
+    var base = paper.rect( 10, height / 4 + 5, width, height / 2, height / 4);
  
     default_value = (default_value) ? default_value : 50;
     var nf = new Object();
@@ -72,3 +74,4 @@ function slider( id, width, height, default_value, styles)
 
     return paper;
 }
+
