@@ -282,3 +282,11 @@ function radar( id, w, h, score, labels, ids, max)
   bg.attr("gradient", "270-#fff-#fff:40-#ddd");
   bg.attr("stroke", "none").toBack();
 }
+
+function barchart( id, width, height, n)
+{
+    var paper = Raphael( id, width, height);
+    nf_background( paper, width, height); 
+    
+//    var base = paper.rect( 10, height / 4 + 5, width, height / 2, height / 4);
+}
