@@ -287,6 +287,14 @@ function barchart( id, width, height, n)
 {
     var paper = Raphael( id, width, height);
     nf_background( paper, width, height); 
-    
+ 
 //    var base = paper.rect( 10, height / 4 + 5, width, height / 2, height / 4);
+    var bars = new Array();
+    var barWidth = width / n;
+    for( var i = 0; i < n; i++){
+      var bar = paper.rect( i * barWidth, 0, barWidth, height).attr({fill:'270-#f90-#a64', stroke:'none'}).click(function(){
+        var newHeight = this.getBBox().height / 2;
+        this.animate({height: newHeight, y: height - newHeight}, 200);
+      });
+    }
 }
