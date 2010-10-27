@@ -304,13 +304,14 @@ function barchart( id, width, height, n)
       var raw_x = x - $('#'+id).offset().left;
       return raw_x;
     };
-    base.mousedown(function(){this.in_drag = true;}).mouseup(function(){this.in_drag = false;});
-    base.mousemove(function(e){
+    base.update = function(e){
       if(this.in_drag){
         var index = Math.floor(this.map(e.pageX) / barWidth);
         var newHeight = height - bars[index].map(e.pageY);
         bars[index].animate({height: newHeight, y: height - newHeight}, 800, 'elastic');
       }
-    });
+};
+    base.mousedown(function(){this.in_drag = true; this.update(e);}).mouseup(function(){this.in_drag = false;});
+    base.mousemove(function(e){this.update(e);});
     base.toFront();
 }
