@@ -288,13 +288,29 @@ function barchart( id, width, height, n)
     var paper = Raphael( id, width, height);
     nf_background( paper, width, height); 
  
-//    var base = paper.rect( 10, height / 4 + 5, width, height / 2, height / 4);
+    var base = paper.rect( 0, 0, width, height).attr({fill:'#ffffff', opacity: 0, stroke:'none'});
     var bars = new Array();
     var barWidth = width / n;
     for( var i = 0; i < n; i++){
-      var bar = paper.rect( i * barWidth, 0, barWidth, height).attr({fill:'270-#f90-#a64', stroke:'none'}).click(function(){
-        var newHeight = this.getBBox().height / 2;
-        this.animate({height: newHeight, y: height - newHeight}, 200);
-      });
+      var bar = paper.rect( i * barWidth, 0, barWidth, height).attr({fill:'270-#f90-#a64', stroke:'none'})
+      bar.map = function(y){
+        var raw_y = y - $('#'+id).offset().top;
+        return raw_y;
+      };
+      bars.push(bar);
     }
+    base.in_drag = false;
+    base.map = function(x){
+      var raw_x = x - $('#'+id).offset().left;
+      return raw_x;
+    };
+    base.mousedown(function(){this.in_drag = true;}).mouseup(function(){this.in_drag = false;});
+    base.mousemove(function(e){
+      if(this.in_drag){
+        var index = Math.floor(this.map(e.pageX) / barWidth);
+        var newHeight = height - bars[index].map(e.pageY);
+        bars[index].animate({height: newHeight, y: height - newHeight}, 800, 'elastic');
+      }
+    });
+    base.toFront();
 }
