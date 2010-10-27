@@ -311,7 +311,7 @@ function barchart( id, width, height, n)
         bars[index].animate({height: newHeight, y: height - newHeight}, 800, 'elastic');
       }
 };
-    base.mousedown(function(){this.in_drag = true; this.update(e);}).mouseup(function(){this.in_drag = false;});
+    base.mousedown(function(e){this.in_drag = true; this.update(e);}).mouseup(function(){this.in_drag = false;});
     base.mousemove(function(e){this.update(e);});
     base.toFront();
 }
