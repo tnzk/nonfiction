@@ -50,7 +50,7 @@ function slider( id, width, height, default_value, styles)
       this.nonfiction.prev = e.pageX;
     };
     base.mouseup(release);
-    nfp(id).mouseout(release);
+    base.mouseout(release);
     base.map = function(x){
       var raw_x = x - $('#'+id).offset().left - 10;
       return raw_x / (this.nonfiction.width / 100);
@@ -297,6 +297,7 @@ function barchart( id, width, height, n)
         var raw_y = y - $('#'+id).offset().top;
         return raw_y;
       };
+      bar.mousedown(function(){ return false;});
       bars.push(bar);
     }
     base.in_drag = false;
@@ -310,8 +311,9 @@ function barchart( id, width, height, n)
         var newHeight = height - bars[index].map(e.pageY);
         bars[index].animate({height: newHeight, y: height - newHeight}, 800, 'elastic');
       }
-};
-    base.mousedown(function(e){this.in_drag = true; this.update(e);}).mouseup(function(){this.in_drag = false;});
-    base.mousemove(function(e){this.update(e);});
+    };
+    base.mousedown(function(e){this.in_drag = true; this.update(e); return false;});
+    base.mouseup(function(){this.in_drag = false; return false;});
+    base.mousemove(function(e){this.update(e); return false;});
     base.toFront();
 }
