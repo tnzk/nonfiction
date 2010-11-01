@@ -51,16 +51,30 @@ radar( "radarchart", 250, 250, scores, labels, ids, 50);</pre>
   <h2>Bar chart</h2>
   <div class="control">
     <div id="barchartpanel"></div>
+    <input type="button" id="barchart_ave" value="Check the average!" />
     <script type="text/javascript">
       barchart( 'barchartpanel', 260, 260, 30);
+      $('#barchart_ave').click(function(){
+        var sum = 0;
+        for( var i = 0; i < 30; i++){
+          sum += Number($('#nf_barchartpanel_'+i).val());
+        }
+        alert(sum / 30);
+      });
     </script>
   </div>
-  <pre class="code">
-&lt;div id=&quot;barchartpanel&quot;&gt;&lt;/div&gt;
+  <pre class="code">&lt;div id=&quot;barchartpanel&quot;&gt;&lt;/div&gt;
+&lt;input type=&quot;button&quot; id=&quot;barchart_ave&quot; value=&quot;Check the average!&quot; /&gt;
 &lt;script type=&quot;text/javascript&quot;&gt;
   barchart( 'barchartpanel', 260, 260, 30);
-&lt;/script&gt;
-  </pre>
+  $('#barchart_ave').click(function(){
+    var sum = 0;
+    for( var i = 0; i &lt; 30; i++){
+      sum += Number($('#nf_barchartpanel_'+i).val());
+    }
+    alert(sum / 30);
+  });
+&lt;/script&gt;</pre>
   <div class="clear">&nbsp;</div>
   <h2>Graph</h2>
   <p>

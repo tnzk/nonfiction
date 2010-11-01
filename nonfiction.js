@@ -8,9 +8,10 @@ function nf_background( paper, w, h)
 function nfn(id){ return 'nf_' + id; }
 function nfo(id){ return $('#'+nfn(id)); }
 function nfp(id){ return $('#'+id); }
-function nf_addfield(id, default_value)
+function nf_addfield(id, default_value, suffix)
 {
-  nfp(id).append('<input type="hidden" name="'+nfn(id)+'" id="'+nfn(id)+'" value="'+default_value+'" />');
+  var fid = (suffix == undefined) ? nfn(id) : nfn(id) + '_' + suffix;
+  nfp(id).append('<input type="hidden" name="'+fid+'" id="'+fid+'" value="'+default_value+'" />');
 }
 
 function slider( id, width, height, default_value, styles)
@@ -297,7 +298,7 @@ function barchart( id, width, height, n)
         var raw_y = y - $('#'+id).offset().top;
         return raw_y;
       };
-      nf_addfield( nfn(id + '_' + i), 100);
+      nf_addfield( id, 10, i);
       bar.mousedown(function(){ return false;});
       bars.push(bar);
     }
@@ -310,7 +311,8 @@ function barchart( id, width, height, n)
       if(this.in_drag){
         var index = Math.floor(this.map(e.pageX) / barWidth);
         var newHeight = height - bars[index].map(e.pageY);
-        bars[index].animate({height: newHeight, y: height - newHeight}, 800, 'elastic');
+        bars[index].animate({height: newHeight, y: height - newHeight}, 555, 'elastic');
+        nfo(id+'_'+index).val(Math.floor(newHeight / height * 100));
       }
     };
     base.mousedown(function(e){this.in_drag = true; this.update(e); return false;});
