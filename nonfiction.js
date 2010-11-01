@@ -297,6 +297,7 @@ function barchart( id, width, height, n)
         var raw_y = y - $('#'+id).offset().top;
         return raw_y;
       };
+      nf_addfield( nfn(id + '_' + i), 100);
       bar.mousedown(function(){ return false;});
       bars.push(bar);
     }
